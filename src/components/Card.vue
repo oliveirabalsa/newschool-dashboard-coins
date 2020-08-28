@@ -25,21 +25,21 @@ export default {
 .bg {
     background-color: rgb(68, 0, 237);
     height: 85px;
-    margin-top: 50px;
+    margin-top: 3px;
     display: flex;
     align-items: center;
     position: relative;
 }
 .person {
-    width: 8%;
+    width: 33px;
     top: 36%;
     position: absolute;
     left: 15%;
 }
 .volutary__name {
-    right: 53%;
+    right: 50%;
     color: white;
-    margin-top: 5%;
+    top: 42%;
     position: absolute;
     font-size: 20px;
 }
@@ -48,7 +48,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 10px;
-  margin-top: 5%;
+  top: 42%;
   position: absolute;
   right: 32%;
 }
@@ -66,17 +66,18 @@ export default {
 
 .drag{
 background: #4e00ff;
-    width: 61px;
+    width: 54px;
     position: absolute;
-    right: -9px;
-    top: 12px;
-    height: 74px;
+    right: 0px;
+    top: 0px;
+    height: 85px;
 }
 .drag__image {
     position: absolute;
-    right: 2px;
-    top: 7px;
-    height: 60px;
+    right: 0;
+    width: 53px;
+    top: 18px;
+    height: 53px;
 }
 
 body{

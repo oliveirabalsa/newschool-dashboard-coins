@@ -1,6 +1,10 @@
 <template>
   <q-layout style="background: #4e00ff" view="lHh Lpr lFf">
     <HeaderMenu />
+    <Card style="margin-top: 50px" />
+    <Card />
+    <Card />
+    <Card />
     <Card />
     <!-- <q-drawer
           @click="leftDrawerOpen = !leftDrawerOpen"
