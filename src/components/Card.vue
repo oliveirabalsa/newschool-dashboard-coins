@@ -7,7 +7,7 @@
     <div class="volutary__name">Voluntario</div>
     <div class="money">
       <img class="money__icon" src="../assets/coin.png" alt="newcoins">
-      <p class="money__quantity">100</p>
+      <p class="money__quantity">1000</p>
     </div>
     <div class="drag">
       <img class="drag__image" src="../assets/down-arrow (1).png" alt="">
