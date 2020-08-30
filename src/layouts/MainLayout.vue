@@ -1,11 +1,14 @@
 <template>
   <q-layout style="background: #4e00ff" view="lHh Lpr lFf">
     <HeaderMenu />
-    <Card style="margin-top: 50px" />
-    <Card />
-    <Card />
-    <Card />
-    <Card />
+    <Card name="Teste" moneyQuantity="100" style="margin-top: 50px" />
+    <Card
+    :key="volunter.id"
+    v-for="volunter in volunters"
+    :setValue="setValue"
+    :name="volunter.name"
+    :moneyQuantity="volunter.moneyQuantity"
+     />
     <!-- <q-drawer
           @click="leftDrawerOpen = !leftDrawerOpen"
       v-model="leftDrawerOpen"
@@ -39,7 +42,43 @@ import Card from '../components/Card.vue';
 export default {
   name: 'MainLayout',
   components: { Card, HeaderMenu },
-  data() {},
+  data() {
+    return {
+      volunters: [
+        {
+          id: 1,
+          name: 'Leonardo',
+          moneyQuantity: '250',
+        },
+        {
+          id: 2,
+          name: 'Bianca',
+          moneyQuantity: '250',
+        }, {
+          id: 3,
+          name: 'Lucas',
+          moneyQuantity: '250',
+        }, {
+          id: 4,
+          name: 'Thiago',
+          moneyQuantity: '250',
+        }, {
+          id: 5,
+          name: 'Guilherme',
+          moneyQuantity: '250',
+        },
+
+      ],
+    };
+  },
+  methods: {
+    // eslint-disable-next-line no-unused-vars
+    setValue() {
+      console.log('oi');
+      // this.volunters[volunter].moneyQuantity = value;
+      // console.log(this.volunters[volunter]);
+    },
+  },
 };
 </script>
 <style scoped>

@@ -1,13 +1,13 @@
 <template>
 <div class="row">
-  <div class="col bg">
+  <div class="col bg" @click="setValue">
     <div>
       <img class="person" src="../assets/person.png" alt="">
     </div>
-    <div class="volutary__name">Voluntario</div>
+    <div class="volutary__name">{{ name }}</div>
     <div class="money">
       <img class="money__icon" src="../assets/coin.png" alt="newcoins">
-      <p class="money__quantity">1000</p>
+      <p class="money__quantity">{{ moneyQuantity }}</p>
     </div>
     <div class="drag">
       <img class="drag__image" src="../assets/down-arrow (1).png" alt="">
@@ -19,6 +19,21 @@
 <script>
 export default {
   name: 'Card',
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+    moneyQuantity: {
+      type: String,
+      required: true,
+    },
+    setValue: {
+      type: Function,
+      required: true,
+    },
+  },
+
 };
 </script>
 <style scoped>
@@ -31,13 +46,14 @@ export default {
     position: relative;
 }
 .person {
-    width: 33px;
+    width: 31px;
     top: 36%;
     position: absolute;
     left: 15%;
 }
 .volutary__name {
     right: 50%;
+    width: 100px;
     color: white;
     top: 42%;
     position: absolute;
@@ -54,12 +70,12 @@ export default {
 }
 
 .money__icon {
-  width: 25px;
-  height: 25px;
+  width: 23px;
+  height: 23px;
 }
 
 .money__quantity {
-  margin: 0 0 0 5px;
+  margin: 0 0 0 3px;
   color: white;
   font-size: 20px;
 }
