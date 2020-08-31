@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Search />
     <balance :Balance="balance" />
     <input placeholder="CoinQuantity" id="coinQty" :value="0" />
     <ToggleCoins />
@@ -8,13 +9,14 @@
 </template>
 
 <script>
-import Balance from "../components/statement/Balance/Balance";
-import AdminHistory from "../components/statement/Admin/AdminHistory";
-import ToggleCoins from "../components/statement/Balance/ToggleCoins";
+import Balance from "../components/statement/balance/Balance";
+import AdminHistory from "../components/statement/admin/AdminHistory";
+import ToggleCoins from "../components/statement/balance/ToggleCoins";
+import Search from "../components/statement/search/Search";
 import eventBus from "../components/eventBus";
 
 export default {
-  components: { AdminHistory, Balance, ToggleCoins },
+  components: { AdminHistory, Balance, ToggleCoins, Search },
   data: () => {
     return {
       id: "",
@@ -24,7 +26,7 @@ export default {
     };
   },
   methods: {
-    getUserInfo() {
+    async getUserInfo() {
       //Axios request to server side
       //////////////////////////////
       //pseudo request
@@ -57,30 +59,39 @@ export default {
       this.changesHistory = info.adminchangesHistory;
     },
 
-    addCoins(qty) {
+    async addCoins(qty) {
       //Send Request to server side
       this.getUserInfo();
     },
-    removeCoins(qty) {
+    async removeCoins(qty) {
       //Send Request to server side
 
       this.getUserInfo();
     },
 
-    refreshCoinQuantity() {}
+    async startSearch(payload) {
+      //Send Request to server side
+
+      this.getUserInfo();
+    }
   },
   async created() {
     this.id = this.$route.params.id;
 
-    this.getUserInfo();
+    await this.getUserInfo();
 
     //add coins by event
-    eventBus.$on("toggleCoins", type => {
+    eventBus.$on("toggleCoins", async type => {
       const coinQuantity = document.getElementById("coinQty").value;
 
       type == "add"
         ? this.addCoins(coinQuantity)
         : this.removeCoins(coinQuantity);
+    });
+
+    //search history event
+    eventBus.$on("startSearch", payload => {
+      this.startSearch(payload);
     });
   }
 };
