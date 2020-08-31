@@ -1,21 +1,26 @@
 <template>
   <div>
-    <AdminHistory :changesHistory="{ changesHistory }" />
     <balance :Balance="balance" />
+    <input placeholder="CoinQuantity" id="coinQty" :value="0" />
+    <ToggleCoins />
+    <AdminHistory :changesHistory="{ changesHistory }" />
   </div>
 </template>
 
 <script>
 import Balance from "../components/statement/Balance/Balance";
 import AdminHistory from "../components/statement/Admin/AdminHistory";
+import ToggleCoins from "../components/statement/Balance/ToggleCoins";
+import eventBus from "../components/eventBus";
 
 export default {
-  components: { AdminHistory, Balance },
+  components: { AdminHistory, Balance, ToggleCoins },
   data: () => {
     return {
       id: "",
       changesHistory: [],
-      balance: 0
+      balance: 0,
+      countInterval: false
     };
   },
   methods: {
@@ -23,7 +28,7 @@ export default {
       //Axios request to server side
       //////////////////////////////
       //pseudo request
-      return {
+      const info = {
         id: 1,
         balance: 20,
         adminchangesHistory: [
@@ -47,14 +52,36 @@ export default {
           }
         ]
       };
-    }
+
+      this.balance = info.balance;
+      this.changesHistory = info.adminchangesHistory;
+    },
+
+    addCoins(qty) {
+      //Send Request to server side
+      this.getUserInfo();
+    },
+    removeCoins(qty) {
+      //Send Request to server side
+
+      this.getUserInfo();
+    },
+
+    refreshCoinQuantity() {}
   },
   async created() {
     this.id = this.$route.params.id;
-    const userInfo = await this.getUserInfo();
 
-    this.balance = userInfo.balance;
-    this.changesHistory = userInfo.adminchangesHistory;
+    this.getUserInfo();
+
+    //add coins by event
+    eventBus.$on("toggleCoins", type => {
+      const coinQuantity = document.getElementById("coinQty").value;
+
+      type == "add"
+        ? this.addCoins(coinQuantity)
+        : this.removeCoins(coinQuantity);
+    });
   }
 };
 </script>
