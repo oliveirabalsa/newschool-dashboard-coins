@@ -5,7 +5,6 @@
     <Card
       :key="volunter.id"
       v-for="volunter in volunters"
-      :setValue="setValue"
       :name="volunter.name"
       :moneyQuantity="volunter.moneyQuantity"
       :id="volunter.id"
@@ -74,14 +73,6 @@ export default {
       ]
     };
   },
-  methods: {
-    // eslint-disable-next-line no-unused-vars
-    setValue() {
-      console.log("oi");
-      // this.volunters[volunter].moneyQuantity = value;
-      // console.log(this.volunters[volunter]);
-    }
-  }
 };
 </script>
 <style scoped>

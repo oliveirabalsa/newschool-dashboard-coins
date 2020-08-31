@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col bg" @click="setValue">
+    <div class="col bg">
       <div>
         <img class="person" src="../assets/person.png" alt="" />
       </div>
@@ -9,7 +9,7 @@
         <img class="money__icon" src="../assets/coin.png" alt="newcoins" />
         <p class="money__quantity">{{ moneyQuantity }}</p>
       </div>
-      <router-link :to="{ path: '/statement/' }">
+      <router-link :to="{ path: `/statement/${id}` }">
         <div class="drag">
           <img class="drag__image" src="../assets/down-arrow (1).png" alt="" />
         </div>
@@ -28,10 +28,6 @@ export default {
     },
     moneyQuantity: {
       type: String,
-      required: true
-    },
-    setValue: {
-      type: Function,
       required: true
     },
     id: {

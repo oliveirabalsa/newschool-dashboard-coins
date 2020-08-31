@@ -1,5 +1,5 @@
 <template>
-  <div>{{ id }}</div>
+  <div>{{ this.id }}</div>
 </template>
 
 <script>
@@ -9,8 +9,12 @@ export default {
   components: [AdminHistory],
   data: () => {
     return {
-      id: this.$route.query.id
+      id: ''
     };
+  },
+  created: function () {
+    this.id = this.$route.params.id
+
   }
 };
 </script>
