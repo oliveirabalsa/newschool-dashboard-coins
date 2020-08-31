@@ -28,7 +28,7 @@ export default {
       //Axios request to server side
       //////////////////////////////
       //pseudo request
-      return {
+      const info = {
         id: 1,
         balance: 20,
         adminchangesHistory: [
@@ -52,6 +52,9 @@ export default {
           }
         ]
       };
+
+      this.balance = info.balance;
+      this.changesHistory = info.adminchangesHistory;
     },
 
     addCoins(qty) {
@@ -62,15 +65,14 @@ export default {
       //Send Request to server side
 
       this.getUserInfo();
-    }
+    },
+
+    refreshCoinQuantity() {}
   },
   async created() {
     this.id = this.$route.params.id;
-    const userInfo = await this.getUserInfo();
 
-    //get userInfo
-    this.balance = userInfo.balance;
-    this.changesHistory = userInfo.adminchangesHistory;
+    this.getUserInfo();
 
     //add coins by event
     eventBus.$on("toggleCoins", type => {
