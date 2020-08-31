@@ -3,12 +3,13 @@
     <HeaderMenu />
     <Card name="Teste" moneyQuantity="100" style="margin-top: 50px" />
     <Card
-    :key="volunter.id"
-    v-for="volunter in volunters"
-    :setValue="setValue"
-    :name="volunter.name"
-    :moneyQuantity="volunter.moneyQuantity"
-     />
+      :key="volunter.id"
+      v-for="volunter in volunters"
+      :setValue="setValue"
+      :name="volunter.name"
+      :moneyQuantity="volunter.moneyQuantity"
+      :id="volunter.id"
+    />
     <!-- <q-drawer
           @click="leftDrawerOpen = !leftDrawerOpen"
       v-model="leftDrawerOpen"
@@ -31,58 +32,59 @@
       </q-list>
     </q-drawer> -->
 
-      <router-view />
+    <router-view />
   </q-layout>
 </template>
 
 <script>
-import HeaderMenu from '../components/HeaderMenu.vue';
-import Card from '../components/Card.vue';
+import HeaderMenu from "../components/HeaderMenu.vue";
+import Card from "../components/Card.vue";
 
 export default {
-  name: 'MainLayout',
+  name: "MainLayout",
   components: { Card, HeaderMenu },
   data() {
     return {
       volunters: [
         {
           id: 1,
-          name: 'Leonardo',
-          moneyQuantity: '250',
+          name: "Leonardo",
+          moneyQuantity: "250"
         },
         {
           id: 2,
-          name: 'Bianca',
-          moneyQuantity: '250',
-        }, {
-          id: 3,
-          name: 'Lucas',
-          moneyQuantity: '250',
-        }, {
-          id: 4,
-          name: 'Thiago',
-          moneyQuantity: '250',
-        }, {
-          id: 5,
-          name: 'Guilherme',
-          moneyQuantity: '250',
+          name: "Bianca",
+          moneyQuantity: "250"
         },
-
-      ],
+        {
+          id: 3,
+          name: "Lucas",
+          moneyQuantity: "250"
+        },
+        {
+          id: 4,
+          name: "Thiago",
+          moneyQuantity: "250"
+        },
+        {
+          id: 5,
+          name: "Guilherme",
+          moneyQuantity: "250"
+        }
+      ]
     };
   },
   methods: {
     // eslint-disable-next-line no-unused-vars
     setValue() {
-      console.log('oi');
+      console.log("oi");
       // this.volunters[volunter].moneyQuantity = value;
       // console.log(this.volunters[volunter]);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
-
 .logout__image {
   vertical-align: middle;
   width: 40px;
@@ -94,5 +96,4 @@ export default {
 .header {
   background-color: white !important;
 }
-
 </style>
