@@ -1,14 +1,15 @@
 <template>
   <q-layout style="background: #4e00ff" view="lHh Lpr lFf">
     <HeaderMenu />
-    <Card name="Teste" moneyQuantity="100" style="margin-top: 50px" />
-    <Card
-      :key="volunter.id"
-      v-for="volunter in volunters"
-      :name="volunter.name"
-      :moneyQuantity="volunter.moneyQuantity"
-      :id="volunter.id"
-    />
+    <div style="margin-top: 50px">
+      <Card
+        :key="volunter.id"
+        v-for="volunter in volunters"
+        :name="volunter.name"
+        :moneyQuantity="volunter.moneyQuantity"
+        :id="volunter.id"
+      />
+    </div>
     <!-- <q-drawer
           @click="leftDrawerOpen = !leftDrawerOpen"
       v-model="leftDrawerOpen"
@@ -72,7 +73,7 @@ export default {
         }
       ]
     };
-  },
+  }
 };
 </script>
 <style scoped>

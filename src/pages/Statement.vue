@@ -1,20 +1,19 @@
 <template>
-  <div>{{ this.id }}</div>
+  <AdminHistory />
 </template>
 
 <script>
 import AdminHistory from "../components/statement/Admin/AdminHistory";
 
 export default {
-  components: [AdminHistory],
+  components: { AdminHistory },
   data: () => {
     return {
-      id: ''
+      id: ""
     };
   },
-  created: function () {
-    this.id = this.$route.params.id
-
+  created: function() {
+    this.id = this.$route.params.id;
   }
 };
 </script>
