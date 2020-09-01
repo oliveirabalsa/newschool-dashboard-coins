@@ -1,1 +1,79 @@
 /* app global css */
+/*colors*/
+:root {
+  --light-purple: #9139ff;
+  --mid-purple: #7300ff;
+  --dark-purple: #6000ce;
+  --light-green: #4edb9a;
+  --dark-green: #399d6f;
+  --yellow: #ffdd07;
+}
+
+.bg-light-purple {
+  background-color: var(--light-purple);
+}
+
+.bg-mid-purple {
+  background-color: var(--mid-purple);
+}
+.bg-dark-purple {
+  background-color: var(--dark-purple);
+}
+.bg-light-green {
+  background-color: var(--light-green);
+}
+.bg-dark-green {
+  background-color: var(--dark-green);
+}
+.bg-yellow {
+  background-color: var(--yellow);
+}
+
+.text-white {
+  color: white;
+}
+
+.date-white input[type="date"] {
+  color: white;
+}
+
+.placeholder-purple::placeholder {
+  color: var(--light-purple);
+}
+
+/*modifyers*/
+.w-100 {
+  width: 100%;
+}
+
+.vh-100 {
+  height: 100vh;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.p-10 {
+  margin: 10px;
+}
+
+.input {
+  flex: 1;
+  padding: 10px 0px;
+  background-color: var(--mid-purple);
+  border: 0;
+  border-bottom: 1px solid white;
+}
+
+.input:focus {
+  outline-width: 0;
+}
+
+.grow-1 {
+  flex-grow: 1;
+}
+
+.m-0 {
+  margin: 0;
+}

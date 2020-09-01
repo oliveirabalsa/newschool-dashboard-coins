@@ -5,12 +5,17 @@
         flat
         dense
         class="hamburguer__menu"
-        size="28px"
+        size="20px"
         icon="menu"
         aria-label="Menu"
       />
       <div>
-        <img class="logout__image" src="../assets/logout (2).png" alt="" />
+        <img
+          class="logout__image"
+          src="../assets/logout (2).png"
+          alt=""
+          style="height: 30px; width: 30px"
+        />
       </div>
     </q-toolbar>
   </q-header>
