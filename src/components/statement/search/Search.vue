@@ -1,24 +1,35 @@
 <template>
-  <div class="q-pa-sm" style="max-width: 300px">
-    <div class="q-gutter-sm">
-      <q-input placeholder="Nome Admin" value="" id="adminName" />
+  <div class="container">
+    <div class="q-gutter-sm row">
+      <input
+        class="input placeholder-purple"
+        placeholder="Nome Admin"
+        value=""
+        id="adminName"
+      />
     </div>
-    <div class="d-flex q-gutter-md">
+    <div class="d-flex q-gutter-md row">
       <input
         placeholder="Data Inicial"
-        class="textbox-n date-white input"
+        class="textbox-n date-white input placeholder-purple col"
         type="text"
         onfocus="(this.type='date')"
         id="startDate"
       />
       <input
         placeholder="Data Final"
-        class="textbox-n date-white input"
+        class="textbox-n date-white input placeholder-purple col"
         type="text"
         onfocus="(this.type='date')"
         id="endDate"
       />
-      <q-btn flat class="text-white" @click.prevent="startSearch">Buscar</q-btn>
+      <div
+        flat
+        class="text-white d-flex items-end "
+        @click.prevent="startSearch"
+      >
+        <img src="~assets/search.png" alt="" height="30px" />
+      </div>
     </div>
   </div>
 </template>
@@ -39,4 +50,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.container {
+  padding: 0px 10px;
+}
+</style>

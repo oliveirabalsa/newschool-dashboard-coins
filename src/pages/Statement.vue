@@ -1,8 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <HeaderMenu />
+    <!-- <HeaderMenu /> -->
     <div class="bg-mid-purple vh-100 w-100 d-flex column">
-      <!--<Search /> -->
       <div class="row bg-mid-purple jutify-center headerControls">
         <Balance
           :Balance="balance"
