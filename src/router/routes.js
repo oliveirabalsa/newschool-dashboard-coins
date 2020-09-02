@@ -8,6 +8,10 @@ const routes = [
     path: "/statement/:id",
     component: () => import("../pages/Statement.vue")
   },
+  {
+    path: "/new/user",
+    component: () => import("../pages/newUser.vue")
+  },
   // Always leave this as last one,
   // but you can also remove it
   {

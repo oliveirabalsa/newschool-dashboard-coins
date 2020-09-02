@@ -1,7 +1,7 @@
 <template>
   <q-layout style="background: #4e00ff" view="lHh Lpr lFf">
     <HeaderMenu />
-    <div style="margin-top: 50px">
+    <div style="margin-top: 50px" class="p-10">
       <Card
         :key="volunter.id"
         v-for="volunter in volunters"

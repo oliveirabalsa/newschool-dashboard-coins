@@ -1,5 +1,5 @@
 <template>
-  <div>{{ Balance }}</div>
+  <div class="text-white" style="font-size: 1.5em">Saldo: {{ Balance }}</div>
 </template>
 
 <script>
