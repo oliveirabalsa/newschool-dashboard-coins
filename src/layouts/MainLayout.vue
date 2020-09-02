@@ -1,8 +1,9 @@
 <template>
-  <q-layout style="background: #4e00ff" view="lHh Lpr lFf">
+  <q-layout class="bg-mid-purple" view="lHh Lpr lFf">
     <HeaderMenu />
-    <div style="margin-top: 50px" class="p-10">
+    <div class="cards">
       <Card
+        class="bg-dark-purple"
         :key="volunter.id"
         v-for="volunter in volunters"
         :name="volunter.name"
@@ -39,44 +40,37 @@
 <script>
 import HeaderMenu from "../components/HeaderMenu.vue";
 import Card from "../components/Card.vue";
-
+import Axios from "axios";
 export default {
   name: "MainLayout",
   components: { Card, HeaderMenu },
   data() {
     return {
-      volunters: [
-        {
-          id: 1,
-          name: "Leonardo",
-          moneyQuantity: "250"
-        },
-        {
-          id: 2,
-          name: "Bianca",
-          moneyQuantity: "250"
-        },
-        {
-          id: 3,
-          name: "Lucas",
-          moneyQuantity: "250"
-        },
-        {
-          id: 4,
-          name: "Thiago",
-          moneyQuantity: "250"
-        },
-        {
-          id: 5,
-          name: "Guilherme",
-          moneyQuantity: "250"
-        }
-      ]
+      volunters: []
     };
+  },
+
+  methods: {
+    async getUserList() {
+      const request = await Axios.get(
+        "https://newschool-dashboard-coins-back.herokuapp.com/user"
+      );
+
+      this.volunters = request.data;
+    }
+  },
+  created() {
+    this.getUserList();
   }
 };
 </script>
 <style scoped>
+.cards {
+  margin-top: 50px;
+}
+.card {
+  margin-top: 2px;
+}
 .logout__image {
   vertical-align: middle;
   width: 40px;
@@ -84,8 +78,5 @@ export default {
 }
 .hamburguer__menu {
   color: rgb(68, 0, 237);
-}
-.header {
-  background-color: white !important;
 }
 </style>

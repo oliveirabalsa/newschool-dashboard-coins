@@ -1,14 +1,10 @@
 <template>
-<p></p>
+  <p></p>
 </template>
 
 <script>
 export default {
-  name: 'PageIndex',
+  name: "PageIndex"
 };
 </script>
-<style scoped>
-  body {
-    background: #4e00ff;
-  }
-</style>>
+<style></style>>
