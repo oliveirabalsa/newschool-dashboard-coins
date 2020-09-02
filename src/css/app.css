@@ -2,8 +2,8 @@
 /*colors*/
 :root {
   --light-purple: #9139ff;
-  --mid-purple: #7300ff;
-  --dark-purple: #6000ce;
+  --mid-purple: #8305f0;
+  --dark-purple: #7a00e3;
   --light-green: #4edb9a;
   --dark-green: #399d6f;
   --yellow: #ffdd07;
@@ -80,4 +80,8 @@
 
 body {
   background-color: var(--mid-purple);
+}
+
+.font-1-5 {
+  font-size: 1.5em;
 }

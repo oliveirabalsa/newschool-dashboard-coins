@@ -1,13 +1,16 @@
 <template>
   <div class="row d-flex card items-center justify-center">
 
-      <img src="~assets/person.png" alt="" height="30px" >
+      <div class="col d-flex col-user">
+        <img src="~assets/person.png" alt="" height="30px" >
 
-      <p class="text-white info col d-flex m-0">{{name}}</p>
+        <p class="text-white info col d-flex m-0">{{name}}</p>
+      </div>
 
-      <img src="~assets/coin.png" alt="" height="30px">
-
-      <p class="text-white info col d-flex m-0">{{moneyQuantity}}</p>
+      <div class="col d-flex justify-end col-coin">
+        <img src="~assets/coin.png" alt="" height="30px">
+        <p class="text-white info m-0">{{moneyQuantity}}</p>
+      </div>
 
       <router-link :to="{ path: `/statement/${id}` }">
         <div class="bg-mid-purple arrow d-flex items-center">
@@ -50,5 +53,13 @@ export default {
 
 .arrow{
   height: 65px;
+}
+
+.col-user{
+  padding-left: 40px;
+}
+
+.col-coin{
+  padding-right: 10px;
 }
 </style>
