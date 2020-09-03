@@ -1,17 +1,18 @@
 <template>
-  <q-layout class="bg-mid-purple" view="lHh Lpr lFf">
-    <ToolBar type="oneSearch" />
-    <div class="cards">
-      <Card
-        class="bg-dark-purple"
-        :key="volunter.id"
-        v-for="volunter in volunters"
-        :name="volunter.name"
-        :moneyQuantity="volunter.moneyQuantity"
-        :id="volunter.id"
-      />
-    </div>
-    <!-- <q-drawer
+  <div>
+    <q-layout class="bg-mid-purple" view="lHh Lpr lFf">
+      <ToolBar type="search" />
+      <div class="cards">
+        <Card
+          class="bg-dark-purple"
+          :key="volunter.id"
+          v-for="volunter in volunters"
+          :name="volunter.name"
+          :moneyQuantity="volunter.moneyQuantity"
+          :id="volunter.id"
+        />
+      </div>
+      <!-- <q-drawer
           @click="leftDrawerOpen = !leftDrawerOpen"
       v-model="leftDrawerOpen"
       show-if-above
@@ -33,8 +34,17 @@
       </q-list>
     </q-drawer> -->
 
-    <router-view />
-  </q-layout>
+      <router-view />
+    </q-layout>
+    <router-link to="/new/user">
+      <button
+        class="position-absolute fixed-bottom w-100 border-none py-10"
+        id="new-button"
+      >
+        <span>Novo Voluntário</span>
+      </button>
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -68,6 +78,7 @@ export default {
 .card {
   margin-top: 2px;
 }
+
 .logout__image {
   vertical-align: middle;
   width: 40px;
@@ -75,5 +86,16 @@ export default {
 }
 .hamburguer__menu {
   color: rgb(68, 0, 237);
+}
+
+::v-deep .q-layout {
+  padding-bottom: 30px;
+}
+
+#new-button {
+  font-size: 1.5em;
+  background-color: #04d98b;
+  color: #00ad77;
+  font-weight: bold;
 }
 </style>

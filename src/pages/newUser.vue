@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <!-- <ToolBar /> -->
+  <q-layout class="bg-mid-purple" view="lHh Lpr lFf">
+    <ToolBar type="back" />
     <!-- fix menu latter -->
     <div class="container">
       <div class="title">Cadastro de Novo Usuário</div>
@@ -57,7 +57,7 @@
         </button>
       </form>
     </div>
-  </div>
+  </q-layout>
 </template>
 
 <script>

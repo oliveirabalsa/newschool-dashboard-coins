@@ -5,7 +5,7 @@
   --mid-purple: #8305f0;
   --dark-purple: #7a00e3;
   --light-green: #04d98b;
-  --dark-green: #00a16f;
+  --dark-green: #00ad77;
   --yellow: #ffdd07;
 }
 
@@ -41,6 +41,10 @@
 }
 .bg-yellow {
   background-color: var(--yellow);
+}
+
+.text-dark-green {
+  color: var(--dark-green);
 }
 
 .text-white {
@@ -98,7 +102,7 @@
 
 .input {
   flex: 1;
-  padding: 10px 0px 0px 10px;
+  padding: 0px 10px;
   background-color: var(--mid-purple);
   border: 0;
   border-bottom: 1px solid white;
@@ -110,6 +114,18 @@
 
 .input::placeholder {
   color: var(--dark-purple);
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.fixed-bottom {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
 }
 
 .grow-1 {
