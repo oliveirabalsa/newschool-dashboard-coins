@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!-- <HeaderMenu /> -->
+    <!-- ToolBar /> -->
     <div class="bg-mid-purple vh-100 w-100 d-flex column">
       <div class="row bg-mid-purple jutify-center headerControls">
         <Balance
@@ -40,12 +40,12 @@ import Balance from "../components/statement/balance/Balance";
 import ChangeHistory from "../components/statement/change/ChangeHistory";
 import ToggleCoins from "../components/statement/balance/ToggleCoins";
 import Search from "../components/statement/search/Search";
-import HeaderMenu from "../components/HeaderMenu";
+import ToolBar from "../components/ToolBar";
 import eventBus from "../components/eventBus";
 import Axios from "axios";
 
 export default {
-  components: { ChangeHistory, Balance, ToggleCoins, Search, HeaderMenu },
+  components: { ChangeHistory, Balance, ToggleCoins, Search, ToolBar },
   data: () => {
     return {
       changesHistory: [],

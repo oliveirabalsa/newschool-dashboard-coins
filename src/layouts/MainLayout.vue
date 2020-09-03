@@ -1,6 +1,6 @@
 <template>
   <q-layout class="bg-mid-purple" view="lHh Lpr lFf">
-    <HeaderMenu />
+    <ToolBar type="oneSearch" />
     <div class="cards">
       <Card
         class="bg-dark-purple"
@@ -38,12 +38,12 @@
 </template>
 
 <script>
-import HeaderMenu from "../components/HeaderMenu.vue";
+import ToolBar from "../components/ToolBar.vue";
 import Card from "../components/Card.vue";
 import Axios from "axios";
 export default {
   name: "MainLayout",
-  components: { Card, HeaderMenu },
+  components: { Card, ToolBar },
   data() {
     return {
       volunters: []
@@ -65,9 +65,6 @@ export default {
 };
 </script>
 <style scoped>
-.cards {
-  margin-top: 50px;
-}
 .card {
   margin-top: 2px;
 }
