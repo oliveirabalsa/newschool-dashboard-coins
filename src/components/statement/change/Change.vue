@@ -29,7 +29,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .change-item {
   margin: -4px;
   padding-top: 20px;

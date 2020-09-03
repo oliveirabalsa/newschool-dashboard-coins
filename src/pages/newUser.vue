@@ -86,7 +86,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .title {
   font-weight: bolder;
   color: white;

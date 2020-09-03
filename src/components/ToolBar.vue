@@ -86,9 +86,11 @@
     <div v-if="type == 'back'">
       <q-header class="bg-white text-dark-purple m-0">
         <q-toolbar class="m-0 p-0">
-          <button class="border-none bg-white">
-            <img src="~assets/arrow-inverted.png" alt="" height="30px" />
-          </button>
+          <router-link to="/">
+            <button class="border-none bg-white">
+              <img src="~assets/arrow-inverted.png" alt="" height="30px" />
+            </button>
+          </router-link>
         </q-toolbar>
       </q-header>
     </div>

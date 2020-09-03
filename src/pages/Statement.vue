@@ -114,7 +114,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .inputCoin {
   height: 0;
   margin: 0px 10px;
