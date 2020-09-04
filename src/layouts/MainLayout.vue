@@ -81,11 +81,10 @@ export default {
               ? shortName.push(name[0])
               : shortName.push(name)
           );
+          shortName = shortName.join().replace(/,/g, " ");
+
+          request.data[index].name = shortName;
         }
-
-        shortName = shortName.join().replace(/,/g, " ");
-
-        request.data[index].name = shortName;
       });
 
       this.volunters = request.data;
