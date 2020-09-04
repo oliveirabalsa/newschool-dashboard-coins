@@ -1,30 +1,40 @@
 <template>
   <div class="d-flex column p-0">
-    <div class="px-10 d-flex column mt-10">
-      <p class="m-0 d-flex items-center font-bold">
-        Pesquisa por data
-      </p>
-      <input
-        type="date"
-        class="bg-dark-purple text-white border-none bottom-white-line pt-10"
-      />
-      <input
-        type="date"
-        class="bg-dark-purple text-white border-none bottom-white-line pt-10"
-      />
-    </div>
-    <div
-      class=" bg-mid-purple d-flex justify-center items-center py-10"
-      @click="startSearch"
-    >
-      <p class="m-0 p-0 font-bold font-1-5">Pesquisar</p>
-      <img
-        src="~assets/search.png"
-        alt=""
-        height="25px"
-        width="25px"
-        style="margin: 0px 10px"
-      />
+    <div class="d-flex column mt-10">
+      <q-expansion-item
+        expand-separator
+        icon="search"
+        label="Pesquisa Por Data"
+      >
+        <q-card>
+          <q-card-section class="m-0">
+            <input
+              type="date"
+              class="bg-dark-purple text-white border-none bottom-white-line pt-10"
+            />
+            <input
+              type="date"
+              class="bg-dark-purple text-white border-none bottom-white-line pt-10"
+            />
+
+            <div
+              class=" bg-light-green d-flex justify-center items-center py-10"
+              @click="startSearch"
+            >
+              <p class="m-0 p-0 font-bold font-1-5 text-dark-green">
+                Pesquisar
+              </p>
+              <img
+                src="~assets/search.png"
+                alt=""
+                height="25px"
+                width="25px"
+                style="margin: 0px 10px"
+              />
+            </div>
+          </q-card-section>
+        </q-card>
+      </q-expansion-item>
     </div>
   </div>
 </template>
@@ -47,5 +57,12 @@ export default {
 <style scoped>
 .container {
   padding: 0px 10px;
+}
+
+.q-card__section {
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  margin: 0px;
 }
 </style>

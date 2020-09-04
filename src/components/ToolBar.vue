@@ -34,7 +34,7 @@
                 class="p-10 ml-auto"
               />
             </button>
-
+            <Search />
             <div
               class="p-10 d-flex position-absolute bg-dark-purple"
               id="div-logout"
