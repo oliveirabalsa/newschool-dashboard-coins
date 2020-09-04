@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <ToolBar type="back" />
-    <div class="bg-mid-purple vh-100 w-100 d-flex column">
+    <div class="bg-mid-purple w-100 d-flex column">
       <div class="row bg-mid-purple jutify-center headerControls">
         <Balance
           :Balance="balance"
@@ -9,23 +9,20 @@
           style="margin-top: 12px"
         />
         <input
-          class="text-white input placeholder-white col inputCoin grow-1"
+          class="text-white input placeholder-white col grow-1"
           v-model="coinQty"
           @click="clearField"
           id="inputCoins"
         />
-        <ToggleCoins class="col" />
+        <ToggleCoins class="col d-flex items-end p-0" />
       </div>
       <div class="w-100">
         <p class="text-white" style="margin-left: 10px; margin-top: 15px">
           Histórico
         </p>
-        <ChangeHistory
-          v-if="changesHistory.length >= 1"
-          :changesHistory="{ changesHistory }"
-        />
+        <Change v-for="obj in changesHistory" :key="obj.id" :changeInfo="obj" />
         <p
-          v-if="changesHistory.length <= 0"
+          v-if="balance == 0"
           class="font-1-5 text-white d-flex justify-center items-center m-0 w-100"
         >
           Nunca Ganhou 1 NC na Vida!
@@ -37,7 +34,7 @@
 
 <script>
 import Balance from "../components/statement/balance/Balance";
-import ChangeHistory from "../components/statement/change/ChangeHistory";
+import Change from "../components/statement/change/Change";
 import ToggleCoins from "../components/statement/balance/ToggleCoins";
 import Search from "../components/statement/search/Search";
 import ToolBar from "../components/ToolBar";
@@ -45,7 +42,7 @@ import eventBus from "../components/eventBus";
 import Axios from "axios";
 
 export default {
-  components: { ChangeHistory, Balance, ToggleCoins, Search, ToolBar },
+  components: { Change, Balance, ToggleCoins, Search, ToolBar },
   data: () => {
     return {
       changesHistory: [],
@@ -65,7 +62,7 @@ export default {
       );
 
       this.balance = money.data[0].moneyQuantity;
-      console.log(changesHistory.data);
+      console.log(changesHistory);
       this.changesHistory = changesHistory.data;
     },
 
@@ -74,10 +71,24 @@ export default {
     },
 
     async addCoins(coinQty) {
+      const payload = {
+        admin: "system",
+        quantity: coinQty.toString(),
+        date: new Date().toISOString().toString(),
+        user_id: this.$route.params.id.toString()
+      };
+
       //Send Request to server side
-      const request = await Axios.put(
+      await Axios.post(
+        `https://newschool-dashboard-coins-back.herokuapp.com/user/transactions`,
+        payload
+      );
+
+      await Axios.put(
         `https://newschool-dashboard-coins-back.herokuapp.com/user/money/${this.$route.params.id}`,
-        { adminName: "system", moneyQuantity: coinQty } //change adminName form system to real name later
+        {
+          moneyQuantity: (this.coinQty + this.balance).toString()
+        }
       );
 
       document.getElementById("inputCoins").value = "";

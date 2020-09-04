@@ -4,18 +4,18 @@
       <q-item v-ripple class="bg-dark-purple row change-item">
         <q-item-section class="text-white col d-flex justify-center">
           <p class="col d-flex justify-center">
-            {{ changeSub.date }}
+            {{ changeInfo.date | convertDate }}
           </p>
         </q-item-section>
         <q-item-section class="text-white">
           <p class="col d-flex justify-center m-0">
-            {{ changeSub.adminName }}
+            {{ changeInfo.admin }}
           </p>
         </q-item-section>
 
         <q-item-section class="text-white">
           <p class="col d-flex justify-center m-0">
-            {{ changeSub.money }}
+            {{ changeInfo.quantity }}
           </p>
         </q-item-section>
       </q-item>
@@ -24,14 +24,23 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
-  props: ["changeSub"]
+  props: ["changeInfo"],
+  filters: {
+    convertDate: date => {
+      return moment(String(date)).format("MM/DD/YYYY");
+    }
+  }
 };
 </script>
 
 <style scoped>
 .change-item {
   margin: -4px;
-  padding-top: 20px;
+}
+
+.column {
+  margin-top: 10px;
 }
 </style>
