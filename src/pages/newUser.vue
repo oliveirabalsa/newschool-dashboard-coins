@@ -114,7 +114,7 @@ export default {
         this.sendRequest = false;
       }
 
-      if (this.moneyQuantity == 0) this.moneyQuantity = "-";
+      if (this.moneyQuantity == 0) payload.moneyQuantity = "0";
 
       if (this.sendRequest) {
         try {
