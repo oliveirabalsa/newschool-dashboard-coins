@@ -114,6 +114,8 @@ export default {
         this.sendRequest = false;
       }
 
+      if (this.moneyQuantity == 0) this.moneyQuantity = "-";
+
       if (this.sendRequest) {
         try {
           await Axios.post(
