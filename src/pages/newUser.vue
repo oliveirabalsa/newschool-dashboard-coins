@@ -1,7 +1,6 @@
 <template>
-  <q-layout class="bg-mid-purple" view="lHh Lpr lFf">
+  <q-layout class="bg-mid-purple m-0 p-0" view="lHh Lpr lFf">
     <ToolBar type="back" />
-    <!-- fix menu latter -->
     <div class="container">
       <div class="title">Cadastro de Novo Usuário</div>
       <form class="d-flex column">
@@ -9,13 +8,13 @@
           <label for="name" class="font-bold text-white font-title-field"
             >Nome do voluntário</label
           >
-          <input id="name" value="" class="input" />
+          <input id="name" value="" class="input" v-model="name" />
         </div>
         <div class="card  bg-dark-purple">
           <label for="email" class="font-bold text-white font-title-field"
             >E-mail do voluntário</label
           >
-          <input id="email" value="" class="input" />
+          <input id="email" value="" class="input" v-model="email" />
         </div>
         <div class="card  bg-dark-purple">
           <label for="coins" class="font-bold text-white font-title-field"
@@ -27,10 +26,14 @@
             value="0"
             type="number"
             class="input text-white input-coins font-1-5 "
+            v-model="moneyQuantity"
           />
         </div>
         <div class="card bg-dark-purple">
-          <label for="coins" class="font-bold text-white font-title-field"
+          <label
+            for="coins"
+            class="font-bold text-white font-title-field"
+            style="margin-top: 10px"
             >Tipo</label
           >
           <div class="d-flex row" id="div-radio">
@@ -52,33 +55,82 @@
             </div>
           </div>
         </div>
-        <button @click.prevent="register" class="register-button">
+        <button
+          @click.prevent="register"
+          class="register-button position-absolute fixed-bottom"
+        >
           CADASTRAR
         </button>
       </form>
+    </div>
+
+    <div class="alert bg-light-green text-white" v-if="successAlert">
+      Cadastrado com sucesso!
+    </div>
+
+    <div class="alert bg-dark-purple text-white" v-if="errorAlert">
+      Ocorreu um erro :(
+    </div>
+
+    <div class="alert bg-yellow text-black" v-if="fieldAlert">
+      Campos Incompletos!
     </div>
   </q-layout>
 </template>
 
 <script>
 import ToolBar from "../components/ToolBar";
+import Axios from "axios";
 export default {
   components: { ToolBar },
   data: () => {
     return {
-      type: "nutella"
+      type: null,
+      errorAlert: false,
+      successAlert: false,
+      fieldAlert: false,
+      sendRequest: true,
+      name: null,
+      email: null,
+      moneyQuantity: 0,
+      type: null
     };
   },
   methods: {
-    register() {
+    async register() {
       const payload = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        coin: document.getElementById("coins").value,
-        type: this.type
+        name: this.name,
+        email: this.email,
+        moneyQuantity: this.moneyQuantity,
+        type: this.type,
+        transactions: []
       };
 
-      console.log(payload);
+      if (this.name == null || this.email == null || this.type == null) {
+        this.fieldAlert = true;
+
+        setInterval(() => (this.fieldAlert = false), 3000);
+
+        this.sendRequest = false;
+      }
+
+      if (this.sendRequest) {
+        try {
+          await Axios.post(
+            "http://newschool-dashboard-coins-back.herokuapp.com/user",
+            payload
+          )
+            .then(resp => {
+              console.log(resp);
+              this.successAlert = true;
+              setInterval(() => (this.successAlert = false), 3000);
+            })
+            .catch(err => {
+              this.errorAlert = true;
+              setInterval(() => (this.errorAlert = false), 3000);
+            });
+        } catch {}
+      }
 
       //send request to server
     }
@@ -99,7 +151,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .container {
@@ -114,8 +166,9 @@ export default {
 }
 
 .card input {
-  margin-top: 0px;
+  padding-top: 10px !important;
   background-color: #7a00e3;
+  color: white;
 }
 
 .card input[type="radio"] {
@@ -128,12 +181,14 @@ export default {
 }
 
 .register-button {
-  padding: 15px 0px;
+  margin-top: 5px;
+  padding: 10px 0px;
   font-weight: bolder;
   font-size: 2em;
   background-color: #04d98b;
   color: #00a16f;
   border: 0;
+  width: 100%;
 }
 
 .radio-button input:checked {

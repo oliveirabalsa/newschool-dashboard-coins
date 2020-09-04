@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!-- ToolBar /> -->
+    <ToolBar type="back" />
     <div class="bg-mid-purple vh-100 w-100 d-flex column">
       <div class="row bg-mid-purple jutify-center headerControls">
         <Balance
