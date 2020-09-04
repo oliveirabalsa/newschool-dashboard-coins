@@ -22,47 +22,18 @@
       <q-drawer show-if-above v-model="left" bordered>
         <div class="bg-mid-purple h-100 text-white">
           <div class="d-flex column bg-dark-purple" id="sidebar-items">
-            <!--search card -->
-            <div class="d-flex column p-0">
-              <button
-                class="d-flex bg-mid-purple border-none items-center"
-                @click="left = false"
-              >
-                <p class="p-0 m-0 text-white">Bem Vindo!</p>
-                <img
-                  src="~assets/arrow-white-inverted.png"
-                  alt=""
-                  height="30px"
-                  class="p-10 ml-auto"
-                />
-              </button>
-
-              <div class="px-10 d-flex column mt-10">
-                <p class="m-0 d-flex items-center font-bold">
-                  Pesquisa por data
-                </p>
-                <input
-                  type="date"
-                  class="bg-dark-purple text-white border-none bottom-white-line pt-10"
-                />
-                <input
-                  type="date"
-                  class="bg-dark-purple text-white border-none bottom-white-line pt-10"
-                />
-              </div>
-              <div
-                class=" bg-mid-purple d-flex justify-center items-center py-10"
-              >
-                <p class="m-0 p-0 font-bold font-1-5">Pesquisar</p>
-                <img
-                  src="~assets/search.png"
-                  alt=""
-                  height="25px"
-                  width="25px"
-                  style="margin: 0px 10px"
-                />
-              </div>
-            </div>
+            <button
+              class="d-flex bg-mid-purple border-none items-center"
+              @click="left = false"
+            >
+              <p class="p-0 m-0 text-white">Bem Vindo!</p>
+              <img
+                src="~assets/arrow-white-inverted.png"
+                alt=""
+                height="30px"
+                class="p-10 ml-auto"
+              />
+            </button>
 
             <div
               class="p-10 d-flex position-absolute bg-dark-purple"
@@ -101,7 +72,9 @@
 </template>
 
 <script>
+import Search from "../components/search/Search";
 export default {
+  components: { Search },
   props: ["type"],
   data() {
     return {

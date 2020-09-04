@@ -1,5 +1,5 @@
 <template>
-  <div class="row d-flex card items-center justify-center">
+  <div class="row d-flex card items-center justify-around">
 
       <div class="col d-flex col-user items-center">
         <img src="~assets/person.png" alt="" height="30px" >
@@ -45,6 +45,7 @@ export default {
   padding-left: 10px;
   min-height: 64px;
   align-items: stretch;
+  max-width: 768px;
 }
 
 .info{
