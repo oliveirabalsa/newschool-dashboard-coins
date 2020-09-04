@@ -51,7 +51,7 @@
   color: white;
 }
 
-.text-black{
+.text-black {
   color: black;
 }
 
@@ -142,6 +142,10 @@
 
 .ml-auto {
   margin-left: auto;
+}
+
+.mt-auto {
+  margin-top: auto;
 }
 
 .border-none {

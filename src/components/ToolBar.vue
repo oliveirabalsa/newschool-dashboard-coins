@@ -64,7 +64,10 @@
               </div>
             </div>
 
-            <div class="p-10 d-flex">
+            <div
+              class="p-10 d-flex position-absolute bg-dark-purple"
+              id="div-logout"
+            >
               <p class="m-0 d-flex items-center font-bold">Sair</p>
               <img
                 src="~assets/logout-white.png"
@@ -136,6 +139,13 @@ export default {
 
 .input-search::placeholder {
   color: #7a00e3;
+}
+
+#div-logout {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
 }
 
 .search-icon {

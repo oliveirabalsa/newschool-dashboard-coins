@@ -123,7 +123,6 @@ export default {
             payload
           )
             .then(resp => {
-              console.log(resp);
               this.successAlert = true;
               setInterval(() => (this.successAlert = false), 3000);
             })
