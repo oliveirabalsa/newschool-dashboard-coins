@@ -66,6 +66,28 @@ export default {
         "https://newschool-dashboard-coins-back.herokuapp.com/user"
       );
 
+      request.data.forEach((obj, index) => {
+        let fullName = obj.name;
+
+        fullName = fullName.split(" ");
+
+        let shortName = [];
+
+        if (fullName.length >= 2) {
+          fullName.forEach((name, index) =>
+            name.split("").length > 2 &&
+            index > 0 &&
+            index < fullName.length - 1
+              ? shortName.push(name[0])
+              : shortName.push(name)
+          );
+        }
+
+        shortName = shortName.join().replace(/,/g, " ");
+
+        request.data[index].name = shortName;
+      });
+
       this.volunters = request.data;
     }
   },

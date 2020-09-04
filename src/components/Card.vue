@@ -1,20 +1,19 @@
 <template>
   <div class="row d-flex card items-center justify-center">
 
-      <div class="col d-flex col-user">
+      <div class="col d-flex col-user items-center">
         <img src="~assets/person.png" alt="" height="30px" >
 
         <p class="text-white info col d-flex m-0">{{name}}</p>
       </div>
 
-      <div class="col d-flex justify-end col-coin">
+      <div class="col d-flex justify-end col-coin items-center">
         <img src="~assets/coin.png" alt="" height="30px">
         <p class="text-white info m-0">{{moneyQuantity}}</p>
       </div>
-
-      <router-link :to="{ path: `/statement/${id}` }">
-        <div class="bg-mid-purple arrow d-flex items-center">
-          <img src="~assets/arrow.png" alt="" height="40px">
+      <router-link :to="{ path: `/statement/${id}` }" class="router-link">
+        <div class="bg-mid-purple d-flex arrow items-center ">
+          <img src="~assets/arrow.png" alt="" id="arrow-image" height="35px">
         </div>
       </router-link>
     </div>
@@ -42,8 +41,10 @@ export default {
 </script>
 <style scoped>
 .card{
+  position: relative;
   padding-left: 10px;
-  height: 65px;
+  min-height: 64px;
+  align-items: stretch;
 }
 
 .info{
@@ -52,7 +53,9 @@ export default {
 }
 
 .arrow{
-  height: 65px;
+  display:inline-block;
+  position: relative;
+
 }
 
 .col-user{
@@ -61,5 +64,12 @@ export default {
 
 .col-coin{
   padding-right: 10px;
+}
+
+.router-link{
+  background-color: #8305f0;
+  display: flex;
+  align-items: center;
+  min-height: 100%;
 }
 </style>
