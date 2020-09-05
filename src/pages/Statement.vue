@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import Balance from "../components/statement/balance/Balance";
+import Balance from "../components/statement/Balance/Balance";
 import Change from "../components/statement/change/Change";
-import ToggleCoins from "../components/statement/balance/ToggleCoins";
+import ToggleCoins from "../components/statement/Balance/ToggleCoins";
 import Search from "../components/search/Search";
 import ToolBar from "../components/ToolBar";
 import eventBus from "../components/eventBus";

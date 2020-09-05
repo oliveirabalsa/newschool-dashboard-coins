@@ -8,7 +8,7 @@
           class="cards"
           v-infinite-scroll="getUserList"
           infinite-scroll-disabled="busy"
-          infinite-scroll-distance="0"
+          infinite-scroll-distance="limit"
         >
           <Card
             class="bg-dark-purple"
@@ -21,7 +21,6 @@
         </div>
         <!-- <q-spinner color="white" size="3em" :thickness="2" /> -->
       </div>
-
       <router-view />
     </q-layout>
     <router-link to="/new/user">
@@ -45,9 +44,10 @@ export default {
   components: { Card, ToolBar },
   data() {
     return {
-      pageStep: 1,
+      page: 1,
       volunters: [],
-      busy: true
+      limit: 10,
+      busy: false
     };
   },
   directives: { infiniteScroll },
@@ -55,13 +55,11 @@ export default {
   methods: {
     async getUserList() {
       this.busy = true;
-
+      this.$q.loading.show()
+      setTimeout(async () => {
       const request = await Axios.get(
-        `https://newschool-dashboard-coins-back.herokuapp.com/user?page=${this.pageStep}`
-      );
-      this.busy = false;
-      this.pageStep += this.pageStep + 1;
-
+        `https://newschool-dashboard-coins-back.herokuapp.com/user`
+      )
       request.data.forEach((obj, index) => {
         let fullName = obj.name;
         fullName = fullName.split(" ");
@@ -81,12 +79,15 @@ export default {
           request.data[index].name = shortName;
         }
       });
-
-      this.volunters = request.data;
+      const append = request.data.slice(this.volunters.length, this.volunters.length + this.limit)
+      this.volunters = this.volunters.concat(append)
+      this.busy = false;
+      this.$q.loading.hide()
+      }, 1000);
     }
   },
-  created() {
-    this.getUserList();
+  ceated() {
+   this.getUserList();
   }
 };
 </script>
