@@ -56,9 +56,14 @@ export default {
     async getUserList() {
       this.busy = true;
       this.$q.loading.show()
+      let stop = 0;
+      if(stop === 1) {
+      return this.$q.loading.hide()
+      }
+      // if(stop = 0){
       setTimeout(async () => {
       const request = await Axios.get(
-        `https://newschool-dashboard-coins-back.herokuapp.com/user`
+        `https://newschool-dashboard-coins-back.herokuapp.com/user?page=${this.page}`
       )
       request.data.forEach((obj, index) => {
         let fullName = obj.name;
@@ -79,11 +84,18 @@ export default {
           request.data[index].name = shortName;
         }
       });
-      const append = request.data.slice(this.volunters.length, this.volunters.length + this.limit)
-      this.volunters = this.volunters.concat(append)
-      this.busy = false;
+      if(!request.data.length) {
+        this.$q.loading.hide()
+        stop++
+        return
+      }
       this.$q.loading.hide()
-      }, 1000);
+      this.page++
+      this.volunters = this.volunters.concat(request.data)
+      console.log(this.volunters)
+      this.busy = false;
+      }, 400);
+    // }
     }
   },
   ceated() {
