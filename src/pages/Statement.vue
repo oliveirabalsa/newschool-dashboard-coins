@@ -46,7 +46,7 @@ export default {
       changesHistory: [],
       balance: 0,
       countInterval: false,
-      coinQty: "Quant"
+      coinQty: "0",
     };
   },
   methods: {
@@ -61,14 +61,17 @@ export default {
 
       this.balance = money.data[0].moneyQuantity;
 
-      this.changesHistory = changesHistory.data;
+      this.changesHistory = changesHistory.data.reverse();
     },
 
     clearField(event) {
       event.target.value = "";
     },
 
-    async ToggleCoins(coinQty, type) {
+    async toggleCoins(coinQty, type) {
+
+      coinQty = coinQty.replace(/\D/gi, '')
+     if(!coinQty){ return console.log('ta tirando')}
       const payload = {
         admin: "system",
         date: new Date().toISOString().toString(),
@@ -79,17 +82,18 @@ export default {
         ? (payload.quantity = coinQty.toString())
         : (payload.quantity = (coinQty * -1).toString());
 
-      await Axios.post(
-        `https://newschool-dashboard-coins-back.herokuapp.com/user/transactions`,
-        payload
-      );
-
-      document.getElementById("inputCoins").value = "";
+      this.$q.loading.show()
+       await Axios.post(
+    'https://newschool-dashboard-coins-back.herokuapp.com/user/transactions',
+    payload,
+  );
+      this.getUserInfo();
+      this.coinQty = 0;
+      this.$q.loading.hide()
     },
 
     async startSearch(payload) {
       //Send Request to server side
-
       this.getUserInfo();
     }
   },
@@ -97,10 +101,12 @@ export default {
     this.getUserInfo();
 
     //add coins by event
-    eventBus.$on("toggleCoins", async type => {
-      type == "add"
-        ? this.addCoins(this.coinQty, type)
-        : this.removeCoins(this.coinQty, type);
+    eventBus.$on("toggleCoins", async (type) => {
+      console.log(type)
+      this.toggleCoins(this.coinQty, type)
+      // type == "add"
+      //   ? this.addCoins(this.coinQty, type)
+      //   : this.removeCoins(this.coinQty, type);
     });
 
     //search history event

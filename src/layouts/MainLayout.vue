@@ -37,6 +37,7 @@
 <script>
 import ToolBar from "../components/ToolBar.vue";
 import Card from "../components/Card.vue";
+import eventBus from "../components/eventBus";
 import Axios from "axios";
 import infiniteScroll from "vue-infinite-scroll";
 export default {
@@ -47,7 +48,8 @@ export default {
       page: 1,
       volunters: [],
       limit: 10,
-      busy: false
+      busy: false,
+      user: "",
     };
   },
   directives: { infiniteScroll },
@@ -96,10 +98,33 @@ export default {
       this.busy = false;
       }, 400);
     // }
-    }
+    },
+  async searchUser(user) {
+      const request = await Axios.get(
+        `https://newschool-dashboard-coins-back.herokuapp.com/user`
+      )
+      if(user) {
+        const userFiltered = await request.data.filter(userData => userData.name.includes(user))
+        if(userFiltered.length){
+        this.volunters = [];
+        this.volunters = userFiltered;
+        console.log(this.volunters)
+        } else {
+          this.getUserList()
+        }
+      } else {
+        this.getUserList()
+      }
+  }
+
+
   },
-  ceated() {
-   this.getUserList();
+  created() {
+    this.getUserList();
+
+    eventBus.$on("searchUser", (user) => {
+      this.searchUser(user);
+    });
   }
 };
 </script>

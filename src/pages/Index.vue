@@ -7,4 +7,4 @@ export default {
   name: "PageIndex"
 };
 </script>
-<style></style>
+<style scoped></style>

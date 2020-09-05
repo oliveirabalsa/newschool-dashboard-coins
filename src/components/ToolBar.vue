@@ -9,12 +9,14 @@
             type="text"
             class="input-search w-100 text-dark-purple"
             placeholder="Pesquisar aluno"
+            id="user"
           />
           <img
             src="~assets/search-purple.png"
             alt=""
             height="25px"
             class="p-10"
+            @click="searchUser"
           />
         </q-toolbar>
       </q-header>
@@ -73,6 +75,7 @@
 
 <script>
 import Search from "../components/search/Search";
+import eventBus from '../components/eventBus'
 export default {
   components: { Search },
   props: ["type"],
@@ -83,6 +86,12 @@ export default {
   },
   created() {
     this.$q.iconSet.arrow.dropdown = "";
+  },
+  methods: {
+      searchUser() {
+        const user = document.querySelector('#user').value
+      eventBus.$emit("searchUser", user);
+    }
   }
 };
 </script>
