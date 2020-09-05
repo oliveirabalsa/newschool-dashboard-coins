@@ -1,26 +1,29 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <HeaderMenu />
-    <div class="bg-mid-purple vh-100 w-100 d-flex column">
-      <!--<Search /> -->
-      <div
-        class="row bg-mid-purple jutify-center"
-        style="margin-top: 70px; padding: 10px"
-      >
-        <Balance :Balance="balance" class="grow-1" style="margin-top: 12px" />
-        <input
-          style="height: 0; margin: 0px 10px; width: 10%; font-size: 1.5em; margin-top: 12px"
-          class="text-white input placeholder-white"
-          placeholder="Quantidade"
-        />
-        <ToggleCoins />
+    <ToolBar type="back" />
+    <div class="bg-mid-purple w-100 d-flex column">
+      <div class="row bg-mid-purple jutify-around headerControls d-flex column">
+        <Balance :Balance="balance" class="" style="margin-top: 12px" />
+        <div class="d-flex">
+          <input
+            class="text-white input placeholder-white "
+            v-model="coinQty"
+            @click="clearField"
+            id="inputCoins"
+          />
+          <ToggleCoins class="d-flex p-0 " />
+        </div>
       </div>
       <div class="w-100">
         <p class="text-white" style="margin-left: 10px; margin-top: 15px">
           Histórico
         </p>
-        <p>
-          <ChangeHistory :changesHistory="{ changesHistory }" />
+        <Change v-for="obj in changesHistory" :key="obj.id" :changeInfo="obj" />
+        <p
+          v-if="balance == 0"
+          class="font-1-5 text-white d-flex justify-center items-center m-0 w-100"
+        >
+          Nunca Ganhou 1 NC na Vida!
         </p>
       </div>
     </div>
@@ -29,65 +32,59 @@
 
 <script>
 import Balance from "../components/statement/balance/Balance";
-import ChangeHistory from "../components/statement/change/ChangeHistory";
+import Change from "../components/statement/change/Change";
 import ToggleCoins from "../components/statement/balance/ToggleCoins";
-import Search from "../components/statement/search/Search";
-import HeaderMenu from "../components/HeaderMenu";
+import Search from "../components/search/Search";
+import ToolBar from "../components/ToolBar";
 import eventBus from "../components/eventBus";
+import Axios from "axios";
 
 export default {
-  components: { ChangeHistory, Balance, ToggleCoins, Search, HeaderMenu },
+  components: { Change, Balance, ToggleCoins, Search, ToolBar },
   data: () => {
     return {
-      id: "",
       changesHistory: [],
       balance: 0,
       countInterval: false,
-      coinQty: 0
+      coinQty: "Quant"
     };
   },
   methods: {
     async getUserInfo() {
-      //Axios request to server side
-      //////////////////////////////
-      //pseudo request
-      const info = {
-        id: 1,
-        balance: 20,
-        adminchangesHistory: [
-          {
-            id: 1,
-            date: "21/02/2020",
-            adminName: "leo onidas",
-            coins: 10
-          },
-          {
-            id: 2,
-            date: "21/02/2020",
-            adminName: "leo onidas",
-            coins: 20
-          },
-          {
-            id: 3,
-            date: "21/02/2020",
-            adminName: "leo onidas",
-            coins: -10
-          }
-        ]
+      const money = await Axios.get(
+        `https://newschool-dashboard-coins-back.herokuapp.com/user/money/${this.$route.params.id}`
+      );
+
+      const changesHistory = await Axios.get(
+        `https://newschool-dashboard-coins-back.herokuapp.com/user/transactions/${this.$route.params.id}?start=0&end=10`
+      );
+
+      this.balance = money.data[0].moneyQuantity;
+
+      this.changesHistory = changesHistory.data;
+    },
+
+    clearField(event) {
+      event.target.value = "";
+    },
+
+    async ToggleCoins(coinQty, type) {
+      const payload = {
+        admin: "system",
+        date: new Date().toISOString().toString(),
+        user_id: this.$route.params.id.toString()
       };
 
-      this.balance = info.balance;
-      this.changesHistory = info.adminchangesHistory;
-    },
+      type == "add"
+        ? (payload.quantity = coinQty.toString())
+        : (payload.quantity = (coinQty * -1).toString());
 
-    async addCoins(qty) {
-      //Send Request to server side
-      this.getUserInfo();
-    },
-    async removeCoins(qty) {
-      //Send Request to server side
+      await Axios.post(
+        `https://newschool-dashboard-coins-back.herokuapp.com/user/transactions`,
+        payload
+      );
 
-      this.getUserInfo();
+      document.getElementById("inputCoins").value = "";
     },
 
     async startSearch(payload) {
@@ -97,17 +94,13 @@ export default {
     }
   },
   async created() {
-    this.id = this.$route.params.id;
-
-    await this.getUserInfo();
+    this.getUserInfo();
 
     //add coins by event
     eventBus.$on("toggleCoins", async type => {
-      const coinQuantity = document.getElementById("coinQty").value;
-
       type == "add"
-        ? this.addCoins(coinQuantity)
-        : this.removeCoins(coinQuantity);
+        ? this.addCoins(this.coinQty, type)
+        : this.removeCoins(this.coinQty, type);
     });
 
     //search history event
@@ -118,4 +111,17 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+#inputCoins {
+  font-size: 1.5em;
+  width: 100%;
+}
+
+.headerControls {
+  margin-top: 70px;
+  padding: 10px;
+}
+
+.ToggleCoins {
+}
+</style>

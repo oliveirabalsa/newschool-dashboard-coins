@@ -2,35 +2,61 @@
 /*colors*/
 :root {
   --light-purple: #9139ff;
-  --mid-purple: #7300ff;
-  --dark-purple: #6000ce;
-  --light-green: #4edb9a;
-  --dark-green: #399d6f;
+  --mid-purple: #8305f0;
+  --dark-purple: #7a00e3;
+  --light-green: #04d98b;
+  --dark-green: #009969;
   --yellow: #ffdd07;
+}
+
+.bg-white {
+  background-color: white;
 }
 
 .bg-light-purple {
   background-color: var(--light-purple);
 }
 
+.text-light-purple {
+  color: var(--light-purple);
+}
+
 .bg-mid-purple {
   background-color: var(--mid-purple);
 }
+
 .bg-dark-purple {
   background-color: var(--dark-purple);
 }
+
+.text-dark-purple {
+  color: var(--dark-purple);
+}
+
 .bg-light-green {
-  background-color: var(--light-green);
+  background-color: var(--light-green) !important;
 }
 .bg-dark-green {
-  background-color: var(--dark-green);
+  background-color: var(--dark-green) !important;
 }
 .bg-yellow {
   background-color: var(--yellow);
 }
 
+.text-dark-green {
+  color: var(--dark-green);
+}
+
+.text-light-green {
+  color: var(--light-green);
+}
+
 .text-white {
   color: white;
+}
+
+.text-black {
+  color: black;
 }
 
 .date-white input[type="date"] {
@@ -46,12 +72,36 @@
   width: 100%;
 }
 
+.h-100 {
+  height: 100%;
+}
+
 .vh-100 {
   height: 100vh;
 }
 
+.vw-100 {
+  width: 100vw;
+}
+
+.font-bold {
+  font-weight: bolder;
+}
+
 .d-flex {
   display: flex;
+}
+
+.font-title-field {
+  font-size: 0.8em;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.p-0 {
+  padding: 0;
 }
 
 .p-10 {
@@ -60,7 +110,7 @@
 
 .input {
   flex: 1;
-  padding: 10px 0px;
+  padding: 0px 10px;
   background-color: var(--mid-purple);
   border: 0;
   border-bottom: 1px solid white;
@@ -68,6 +118,22 @@
 
 .input:focus {
   outline-width: 0;
+}
+
+.input::placeholder {
+  color: var(--dark-purple);
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.fixed-bottom {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
 }
 
 .grow-1 {
@@ -78,6 +144,54 @@
   margin: 0;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.border-none {
+  border: 0;
+}
+
+.bottom-white-line {
+  border-bottom: 2px solid white;
+}
+
+.px-10 {
+  padding: 0px 10px;
+}
+
+.py-10 {
+  padding: 10px 0px;
+}
+
+.pt-10 {
+  padding-top: 10px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
 body {
   background-color: var(--mid-purple);
+}
+
+.font-1-5 {
+  font-size: 1.5em;
+}
+
+.alert {
+  position: absolute;
+  top: 100px;
+  padding: 10px;
+  border-radius: 0px 5px 5px 0px;
+  font-weight: bold;
+}
+
+#toolbar-main::after {
+  color: black;
 }
