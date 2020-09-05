@@ -47,6 +47,10 @@
   color: var(--dark-green);
 }
 
+.text-light-green {
+  color: var(--light-green);
+}
+
 .text-white {
   color: white;
 }

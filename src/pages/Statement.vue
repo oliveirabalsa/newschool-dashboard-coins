@@ -2,19 +2,17 @@
   <q-layout view="lHh Lpr lFf">
     <ToolBar type="back" />
     <div class="bg-mid-purple w-100 d-flex column">
-      <div class="row bg-mid-purple jutify-center headerControls">
-        <Balance
-          :Balance="balance"
-          class="grow-1 col"
-          style="margin-top: 12px"
-        />
-        <input
-          class="text-white input placeholder-white col grow-1"
-          v-model="coinQty"
-          @click="clearField"
-          id="inputCoins"
-        />
-        <ToggleCoins class="col d-flex items-end p-0" />
+      <div class="row bg-mid-purple jutify-around headerControls d-flex column">
+        <Balance :Balance="balance" class="" style="margin-top: 12px" />
+        <div class="d-flex">
+          <input
+            class="text-white input placeholder-white "
+            v-model="coinQty"
+            @click="clearField"
+            id="inputCoins"
+          />
+          <ToggleCoins class="d-flex p-0 " />
+        </div>
       </div>
       <div class="w-100">
         <p class="text-white" style="margin-left: 10px; margin-top: 15px">
@@ -62,7 +60,7 @@ export default {
       );
 
       this.balance = money.data[0].moneyQuantity;
-      console.log(changesHistory);
+
       this.changesHistory = changesHistory.data;
     },
 
@@ -70,35 +68,23 @@ export default {
       event.target.value = "";
     },
 
-    async addCoins(coinQty) {
+    async ToggleCoins(coinQty, type) {
       const payload = {
         admin: "system",
-        quantity: coinQty.toString(),
         date: new Date().toISOString().toString(),
         user_id: this.$route.params.id.toString()
       };
 
-      //Send Request to server side
+      type == "add"
+        ? (payload.quantity = coinQty.toString())
+        : (payload.quantity = (coinQty * -1).toString());
+
       await Axios.post(
         `https://newschool-dashboard-coins-back.herokuapp.com/user/transactions`,
         payload
       );
 
-      await Axios.put(
-        `https://newschool-dashboard-coins-back.herokuapp.com/user/money/${this.$route.params.id}`,
-        {
-          moneyQuantity: (this.coinQty + this.balance).toString()
-        }
-      );
-
       document.getElementById("inputCoins").value = "";
-
-      this.getUserInfo();
-    },
-    async removeCoins(coinQty) {
-      //Send Request to server side
-
-      this.getUserInfo();
     },
 
     async startSearch(payload) {
@@ -113,8 +99,8 @@ export default {
     //add coins by event
     eventBus.$on("toggleCoins", async type => {
       type == "add"
-        ? this.addCoins(this.coinQty)
-        : this.removeCoins(this.coinQty);
+        ? this.addCoins(this.coinQty, type)
+        : this.removeCoins(this.coinQty, type);
     });
 
     //search history event
@@ -126,15 +112,16 @@ export default {
 </script>
 
 <style scoped>
-.inputCoin {
-  height: 0;
-  margin: 0px 10px;
+#inputCoins {
   font-size: 1.5em;
-  margin-top: 14px;
+  width: 100%;
 }
 
 .headerControls {
   margin-top: 70px;
   padding: 10px;
+}
+
+.ToggleCoins {
 }
 </style>

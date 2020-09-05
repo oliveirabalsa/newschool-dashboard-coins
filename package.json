@@ -19,7 +19,8 @@
     "core-js": "^3.6.5",
     "moment": "^2.27.0",
     "quasar": "^1.0.0",
-    "vue": "^2.6.12"
+    "vue": "^2.6.12",
+    "vue-infinite-scroll": "^2.0.2"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",

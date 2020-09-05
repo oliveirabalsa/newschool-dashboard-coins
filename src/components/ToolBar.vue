@@ -36,7 +36,7 @@
             </button>
             <Search />
             <div
-              class="p-10 d-flex position-absolute bg-dark-purple"
+              class=" d-flex position-absolute bg-dark-purple"
               id="div-logout"
             >
               <p class="m-0 d-flex items-center font-bold">Sair</p>
