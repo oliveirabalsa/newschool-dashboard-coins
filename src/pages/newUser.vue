@@ -125,6 +125,10 @@ export default {
             .then(resp => {
               this.successAlert = true;
               setInterval(() => (this.successAlert = false), 3000);
+              this.type = '';
+              this.email = '';
+              this.this.moneyQuantity = '';
+              this.this.name = '';
             })
             .catch(err => {
               this.errorAlert = true;

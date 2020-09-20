@@ -9,13 +9,21 @@
         <q-card>
           <q-card-section class="m-0">
             <input
+              id="startDate"
               type="date"
               class="bg-dark-purple text-white border-none bottom-white-line pt-10"
             />
             <input
+              id="endDate"
               type="date"
               class="bg-dark-purple text-white border-none bottom-white-line pt-10"
             />
+            <!-- <input
+              id="adminName"
+              placeholder="Nome do admin"
+              type="text"
+              class="bg-dark-purple text-white border-none bottom-white-line pt-10"
+            /> -->
 
             <div
               class=" bg-light-green d-flex justify-center items-center py-10"
@@ -44,17 +52,23 @@ import eventBus from "../eventBus";
 export default {
   methods: {
     startSearch() {
-      eventBus.$emit("startSearch", {
-        adminName: document.getElementById("adminName").value,
-        startDate: document.getElementById("startDate").value,
-        endDate: document.getElementById("endDate").value
-      });
+      const startDate = document.getElementById("startDate").value
+      const endDate = document.getElementById("endDate").value
+      eventBus.$emit("startSearch", {startDate, endDate});
     }
   }
 };
 </script>
 
 <style scoped>
+*:focus {
+  outline: none;
+}
+
+::placeholder {
+  color: white;
+}
+
 .container {
   padding: 0px 10px;
 }

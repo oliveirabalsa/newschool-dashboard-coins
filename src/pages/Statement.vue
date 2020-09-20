@@ -23,7 +23,13 @@
           v-if="balance == 0"
           class="font-1-5 text-white d-flex justify-center items-center m-0 w-100"
         >
-          Nunca Ganhou 1 NC na Vida!
+          Nunca ganhou coins :/
+        </p>
+                <p
+          v-if="!changesHistory || !changesHistory.length"
+          class="font-1-5 text-white d-flex justify-center items-center m-0 w-100"
+        >
+          Sem histórico de transações :/
         </p>
       </div>
     </div>
@@ -56,7 +62,7 @@ export default {
       );
 
       const changesHistory = await Axios.get(
-        `https://newschool-dashboard-coins-back.herokuapp.com/user/transactions/${this.$route.params.id}?start=0&end=10`
+        `https://newschool-dashboard-coins-back.herokuapp.com/user/transactions/${this.$route.params.id}`
       );
 
       this.balance = money.data[0].moneyQuantity;

@@ -65,7 +65,7 @@ export default {
       // if(stop = 0){
       setTimeout(async () => {
       const request = await Axios.get(
-        `https://newschool-dashboard-coins-back.herokuapp.com/user?page=${this.page}`
+        `https://newschool-dashboard-coins-back.herokuapp.com/user`
       )
       request.data.forEach((obj, index) => {
         let fullName = obj.name;
@@ -84,40 +84,45 @@ export default {
           shortName = shortName.join().replace(/,/g, " ");
 
           request.data[index].name = shortName;
+          request.data.sort((a,b)=>Number(b.moneyQuantity)- Number(a.moneyQuantity))
         }
       });
-      if(!request.data.length) {
-        this.$q.loading.hide()
-        stop++
-        return
-      }
+      // if(!request.data.length) {
+      //   this.$q.loading.hide()
+      //   stop++
+      //   return
+      // }
       this.$q.loading.hide()
-      this.page++
-      this.volunters = this.volunters.concat(request.data)
-      console.log(this.volunters)
+      const append = request.data.slice(this.volunters.length, this.volunters.length + this.limit)
+      if(!append.length) { return this.$q.loading.hide() }
+      this.volunters = this.volunters.concat(append)
       this.busy = false;
+      this.$q.loading.hide()
       }, 400);
-    // }
     },
   async searchUser(user) {
-      const request = await Axios.get(
+      if(user) {
+        const request = await Axios.get(
         `https://newschool-dashboard-coins-back.herokuapp.com/user`
       )
-      if(user) {
         const userFiltered = await request.data.filter(userData => userData.name.includes(user))
         if(userFiltered.length){
         this.volunters = [];
+        console.log(this.volunters)
         this.volunters = userFiltered;
         console.log(this.volunters)
+        user = '';
         } else {
-          this.getUserList()
+          this.volunters = [];
+          this.page = 1;
+          this.getUserList();
         }
       } else {
-        this.getUserList()
+        this.volunters = [];
+        this.page = 1;
+        this.getUserList();
       }
   }
-
-
   },
   created() {
     this.getUserList();

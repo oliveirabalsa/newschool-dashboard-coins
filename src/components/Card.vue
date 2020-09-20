@@ -1,15 +1,13 @@
 <template>
   <div class="row d-flex card items-center justify-around">
-
       <div class="col d-flex col-user items-center">
         <img src="~assets/person.png" alt="" height="30px" >
-
         <p class="text-white info col d-flex m-0">{{name}}</p>
       </div>
 
       <div class="col d-flex justify-end col-coin items-center">
         <img src="~assets/coin.png" alt="" height="30px">
-        <p class="text-white info m-0">{{moneyQuantity}}</p>
+        <p class="text-white info m-0 money-text">{{moneyQuantity}}</p>
       </div>
       <router-link :to="{ path: `/statement/${id}` }" class="router-link">
         <div class="bg-mid-purple d-flex arrow items-center ">
@@ -22,21 +20,21 @@
 
 <script>
 export default {
-  name: "Card",
+  name: 'Card',
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     moneyQuantity: {
       type: String,
-      required: true
+      required: true,
     },
     id: {
       type: Number,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 <style scoped>
@@ -56,15 +54,20 @@ export default {
 .arrow{
   display:inline-block;
   position: relative;
+  right: 0;
 
 }
 
 .col-user{
-  padding-left: 40px;
+  padding-left: 10px;
 }
 
 .col-coin{
   padding-right: 10px;
+  margin-left: 30px;
+}
+.money-text{
+  width: 44px;
 }
 
 .router-link{

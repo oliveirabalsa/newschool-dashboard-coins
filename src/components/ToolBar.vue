@@ -3,8 +3,8 @@
     <!-- toolbar with one input for search user -->
     <div v-if="type == 'search'">
       <q-header class="bg-white text-dark-purple m-0">
-        <q-toolbar class="m-0">
-          <q-btn dense flat round icon="menu" @click="left = !left" />
+        <q-toolbar class="m-0 toolbar-menu">
+          <!-- <q-btn dense flat round icon="menu" @click="left = !left" /> -->
           <input
             type="text"
             class="input-search w-100 text-dark-purple"
@@ -74,28 +74,32 @@
 </template>
 
 <script>
-import Search from "../components/search/Search";
-import eventBus from '../components/eventBus'
+import Search from '../components/search/Search';
+import eventBus from './eventBus';
+
 export default {
   components: { Search },
-  props: ["type"],
+  props: ['type'],
   data() {
     return {
-      left: false
+      left: false,
     };
   },
   created() {
-    this.$q.iconSet.arrow.dropdown = "";
+    this.$q.iconSet.arrow.dropdown = '';
   },
   methods: {
-      searchUser() {
-        const user = document.querySelector('#user').value
-      eventBus.$emit("searchUser", user);
-    }
-  }
+    searchUser() {
+      const user = document.querySelector('#user').value;
+      eventBus.$emit('searchUser', user);
+    },
+  },
 };
 </script>
 <style scoped>
+*:focus {
+    outline: none;
+}
 .logout__image {
   vertical-align: middle;
   width: 40px;
@@ -110,12 +114,16 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+::v-deep .q-btn .q-icon, .q-btn .q-spinner {
+  font-size: 2.7em;
+  margin-right: 10px;
+}
 
 .input-search {
   background-color: white;
   border: 0;
+  font-size: 18px;
   border-bottom: solid 2px #7a00e3;
-  margin-top: -10px;
   color: #7a00e3;
 }
 
@@ -135,11 +143,8 @@ export default {
 }
 
 .toolbar-menu {
-  padding: 0;
-  margin: 0;
-  display: flex;
-  padding: 10px 30px;
-  justify-content: center;
+  padding: 10px;
+  justify-content: baseline;
 }
 
 #div-drop-down {
